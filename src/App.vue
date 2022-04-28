@@ -8,6 +8,8 @@
   <div v-for="(value,i) in valueList" :key="i">
     <h4 :style = "style">{{products[i]}}</h4>
     <p>{{valueList[i]}} 만원</p>
+    <button @click="increase(i)">허위매물신고</button><span>신고수 : {{faultCntList[i]}}</span>
+    <!-- <button @mouseover="faultCnt++">허위매물신고</button><span>신고수 : {{faultCnt}}</span> -->
   </div>
 </template>
 
@@ -22,7 +24,13 @@ export default {
       style : 'color : blue',
       products : ['역삼동원룸','낙성대원룸','마포구원룸'],
       menuList : ['Home','Shop','About'],
-      valueList : ['30','40','50']
+      valueList : ['30','40','50'],
+      faultCntList : [0,0,0]
+    }
+  },
+  methods: {
+    increase(i){
+      this.faultCntList[i]++;
     }
   },
   components: {
