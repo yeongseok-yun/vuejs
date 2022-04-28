@@ -1,17 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div>
-    {{logo}}
-    <h4 :style = "style">{{products[0]}}</h4>
-    <p>50 만원</p>
+  <div class = "menu">
+    <!-- <a v-for="(menu,i) in menuList" :key="i">{{menuList[i]}}</a> -->
+    <a v-for="menu in menuList" :key="menu">{{menu}}</a>
+    
   </div>
-  <div>
-    <h4>{{products[1]}}</h4>
-    <p>70 만원</p>
-  </div>
-  <div>
-    <h4>{{products[2]}}</h4>
-    <p>40 만원</p>
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <div v-for="(value,i) in valueList" :key="i">
+    <h4 :style = "style">{{products[i]}}</h4>
+    <p>{{valueList[i]}} 만원</p>
   </div>
 </template>
 
@@ -24,7 +20,9 @@ export default {
     return {
       logo : '원룸샵',
       style : 'color : blue',
-      products : ['역삼동원룸','낙성대원룸','마포구원룸']
+      products : ['역삼동원룸','낙성대원룸','마포구원룸'],
+      menuList : ['Home','Shop','About'],
+      valueList : ['30','40','50']
     }
   },
   components: {
@@ -39,6 +37,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+}
+.menu {
+  background: darkslateblue;
+  padding : 15px;
+  border-radius: 5px;
+}
+.menu a {
+  color : white;
+  padding: 10px;
 }
 </style>
