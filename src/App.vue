@@ -2,8 +2,9 @@
 
   <div class="black-bg" v-if="modalFlg == 1">
     <div class = "white-bg">
-      <h4>상세페이지</h4>
-      <p>상세 내용</p>
+      <h4>{{products[clickedNum].title}}</h4>
+      <p>{{products[clickedNum].content}}</p>
+      <img class = "room-img" :src = "products[clickedNum].image">
       <p @click = "modalFlg = 0">닫기</p>
     </div>
   </div>
@@ -15,7 +16,7 @@
   </div>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <div v-for="(value,i) in valueList" :key="i">
-    <img @click= "modalFlg=1" :src="products[i].image" class= "room-img">
+    <img @click= "modalFlg=1; clickedNum = i" :src="products[i].image" class= "room-img">
     <h4 :style = "style">{{products[i].title}}</h4>
     <p>{{products[i].price}} 만원</p>
     <!-- <button @click="increase(i)">허위매물신고</button><span>신고수 : {{faultCntList[i]}}</span> -->
@@ -30,6 +31,7 @@ export default {
   name: 'App',
   data() {
     return {
+      clickedNum : 0,
       modalFlg : 0,
       logo : '원룸샵',
       style : 'color : blue',
@@ -87,7 +89,7 @@ div {
   padding: 10px;
 }
 .room-img{
-  width:150px;
+  width:100%;
   margin-top:20px;
 }
 </style>
