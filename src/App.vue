@@ -15,16 +15,16 @@
   </div>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <div v-for="(value,i) in valueList" :key="i">
-    <img @click= "modalFlg=1" src="./assets/img01.jpg" class= "room-img">
-    <h4 :style = "style">{{products[i]}}</h4>
-    <p>{{valueList[i]}} 만원</p>
-    <button @click="increase(i)">허위매물신고</button><span>신고수 : {{faultCntList[i]}}</span>
+    <img @click= "modalFlg=1" :src="products[i].image" class= "room-img">
+    <h4 :style = "style">{{products[i].title}}</h4>
+    <p>{{products[i].price}} 만원</p>
+    <!-- <button @click="increase(i)">허위매물신고</button><span>신고수 : {{faultCntList[i]}}</span> -->
     <!-- <button @mouseover="faultCnt++">허위매물신고</button><span>신고수 : {{faultCnt}}</span> -->
   </div>
 </template>
 
 <script>
-
+import data from './assets/data.js'
 
 export default {
   name: 'App',
@@ -33,7 +33,7 @@ export default {
       modalFlg : 0,
       logo : '원룸샵',
       style : 'color : blue',
-      products : ['역삼동원룸','낙성대원룸','마포구원룸'],
+      products : data,
       menuList : ['Home','Shop','About'],
       valueList : ['30','40','50'],
       faultCntList : [0,0,0]
