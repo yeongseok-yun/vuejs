@@ -26,6 +26,19 @@ export default {
         months: 1,
       };
     },
+    watch : {
+      months(param){
+        if(param > 12){
+          this.months = 1;
+          alert('12개월 이상 입력 불가')
+          
+        }
+        if(isNan(param) == true){
+          this.months = 1;
+          alert('문자 입력 불가')
+        }
+      }
+    }
 }
 </script>
 
