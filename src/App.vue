@@ -1,32 +1,25 @@
 <template>
 
-  <div class="black-bg" v-if="modalFlg == 1">
-    <div class = "white-bg">
-      <h4>{{products[clickedNum].title}}</h4>
-      <p>{{products[clickedNum].content}}</p>
-      <img class = "room-img" :src = "products[clickedNum].image">
-      <p @click = "modalFlg = 0">닫기</p>
-    </div>
-  </div>
+  <DetailModal @closeModal = "modalFlg = 0" :products = 'products' :clickedNum = 'clickedNum' :modalFlg = 'modalFlg'/>
 
   <div class = "menu">
     <!-- <a v-for="(menu,i) in menuList" :key="i">{{menuList[i]}}</a> -->
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
     
   </div>
+
+  
+  <DiscountCom/>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <div v-for="(value,i) in valueList" :key="i">
-    <img @click= "modalFlg=1; clickedNum = i" :src="products[i].image" class= "room-img">
-    <h4 :style = "style">{{products[i].title}}</h4>
-    <p>{{products[i].price}} 만원</p>
-    <!-- <button @click="increase(i)">허위매물신고</button><span>신고수 : {{faultCntList[i]}}</span> -->
-    <!-- <button @mouseover="faultCnt++">허위매물신고</button><span>신고수 : {{faultCnt}}</span> -->
-  </div>
+
+  <ItemCard @openModal = "modalFlg = 1;clickedNum = $event" :product = 'product' v-for="product in products" :key="product"/>
 </template>
 
 <script>
-import data from './assets/data.js'
-
+import data from './assets/data.js';
+import DiscountCom from './components/DiscountCom.vue';
+import DetailModal from './components/DetailModal.vue';
+import ItemCard from './components/ItemCard.vue';
 export default {
   name: 'App',
   data() {
@@ -47,6 +40,9 @@ export default {
     }
   },
   components: {
+    DiscountCom : DiscountCom,
+    DetailModal : DetailModal,
+    ItemCard : ItemCard,
   }
 }
 </script>
@@ -91,5 +87,11 @@ div {
 .room-img{
   width:100%;
   margin-top:20px;
+}
+.discount{
+  background: gray;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 </style>
