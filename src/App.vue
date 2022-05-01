@@ -1,7 +1,7 @@
 <template>
-
-  <DetailModal @closeModal = "modalFlg = 0" :products = 'products' :clickedNum = 'clickedNum' :modalFlg = 'modalFlg'/>
-
+  <transition name="fade">
+    <DetailModal @closeModal = "modalFlg = 0" :products = 'products' :clickedNum = 'clickedNum' :modalFlg = 'modalFlg'/>
+  </transition>
   <div class = "menu">
     <!-- <a v-for="(menu,i) in menuList" :key="i">{{menuList[i]}}</a> -->
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
@@ -48,6 +48,26 @@ export default {
 </script>
 
 <style>
+.fade-enter-from{
+  /* opacity : 0; */
+  transform : translateY(-1000px);
+}
+.fade-enter-active{
+  transition : all 1s;
+}
+.fade-enter-to{
+  /* opacity: 1; */
+  transform : translateY(0px);
+}
+.fade-leave-from{
+  opacity : 1;
+}
+.fade-leave-active{
+  transition : all 1s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
