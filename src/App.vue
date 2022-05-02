@@ -9,8 +9,13 @@
   </div>
 
   
-  <DiscountCom/>
+  <DiscountCom v-if="showDiscount == true"/>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="priceSortDown">가격역순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
 
   <ItemCard @openModal = "modalFlg = 1;clickedNum = $event" :product = 'product' v-for="product in products" :key="product"/>
 </template>
@@ -20,15 +25,20 @@ import data from './assets/data.js';
 import DiscountCom from './components/DiscountCom.vue';
 import DetailModal from './components/DetailModal.vue';
 import ItemCard from './components/ItemCard.vue';
+
+
+
 export default {
   name: 'App',
   data() {
     return {
+      showDiscount : true,
       clickedNum : 0,
       modalFlg : 0,
       logo : '원룸샵',
       style : 'color : blue',
       products : data,
+      nocngProducts : [...data],
       menuList : ['Home','Shop','About'],
       valueList : ['30','40','50'],
       faultCntList : [0,0,0]
@@ -37,8 +47,28 @@ export default {
   methods: {
     increase(i){
       this.faultCntList[i]++;
+    },
+    priceSort(){
+      this.products.sort(function(a,b){
+        return a.price-b.price
+      });
+    },
+    sortBack(){
+        this.products = [...this.nocngProducts];
+    },
+    priceSortDown(){
+      this.products.sort(function(a,b){
+        return b.price - a.price
+      })
     }
   },
+
+  mounted(){
+    setTimeout(()=>{
+      this.showDiscount = false;
+    },2000);
+  },
+  
   components: {
     DiscountCom : DiscountCom,
     DetailModal : DetailModal,
